@@ -34,12 +34,18 @@ defmodule EthCalls do
             handler
           end)
 
+        maybe_templates =
+          case manifest["templates"] do
+            nil -> []
+            t -> t
+          end
+
         templates =
-          Enum.map(manifest["templates"], fn %{
-                                               "mapping" => %{
-                                                 "file" => %{"/" => <<"/ipfs/">> <> handler}
-                                               }
-                                             } ->
+          Enum.map(maybe_templates, fn %{
+                                         "mapping" => %{
+                                           "file" => %{"/" => <<"/ipfs/">> <> handler}
+                                         }
+                                       } ->
             handler
           end)
 

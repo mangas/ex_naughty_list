@@ -20,7 +20,12 @@ defmodule NaughtyList.Cli do
       |> Enum.filter(fn {deployment_id, has_calls} -> has_calls end)
       |> Enum.count()
 
-    percent = count * 100 / result
+    percent =
+      case result do
+        0 -> 0
+        r -> count * 100 / r
+      end
+
     IO.puts("#{percent}% use eth-call")
   end
 end
