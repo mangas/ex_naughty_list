@@ -57,7 +57,6 @@ defmodule Ipfs do
       ["#{scheme}://#{host}:#{port}", base]
       |> Enum.reject(&is_nil/1)
       |> Enum.join("/")
-      |> IO.inspect()
     end
   end
 end

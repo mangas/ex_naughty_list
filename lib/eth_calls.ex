@@ -45,14 +45,13 @@ defmodule EthCalls do
 
         {id,
          Enum.concat(templates, ds)
-         |> IO.inspect()
          |> Enum.uniq()}
     end)
   end
 
   @eth_call ~c"ethereum.call"
   def sg_use_eth_calls?(compiled_wasm) when is_binary(compiled_wasm) do
-    match = :binary.match(compiled_wasm, :binary.list_to_bin(@eth_call)) |> IO.inspect()
+    match = :binary.match(compiled_wasm, :binary.list_to_bin(@eth_call))
 
     case match do
       :nomatch -> false
