@@ -12,6 +12,15 @@ defmodule Ipfs do
     defstruct ~w(scheme host port base)a
   end
 
+  def list_pinned(conn) do
+    # "https://ipfs.network.thegraph.com/ipfs/api/v0/pin/ls?size=true&stream=true"
+    request(
+      conn,
+      "pin/ls",
+      &HTTPoison.post(&1, [], [], params: %{"size" => true, "stream" => true})
+    )
+  end
+
   @doc """
   High level function allowing to perform GET requests to the node.
 
