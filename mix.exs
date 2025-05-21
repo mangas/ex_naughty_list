@@ -46,7 +46,6 @@ defmodule NaughtyList.MixProject do
   defp deps do
     [
       {:yaml_elixir, "~> 2.11"},
-      {:poison, "~> 6.0"},
       {:httpoison, "~> 2.2"},
       {:burrito, "~> 1.3.0"}
     ]

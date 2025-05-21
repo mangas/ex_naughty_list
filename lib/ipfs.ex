@@ -1,4 +1,5 @@
 defmodule Ipfs do
+  require Logger
   alias HTTPoison.{Response, Error}
 
   defmodule Ipfs.IPFS do
@@ -19,6 +20,18 @@ defmodule Ipfs do
       "pin/ls",
       &HTTPoison.post(&1, [], [], params: %{"size" => true, "stream" => true})
     )
+  end
+
+  def get_retry(conn, file_id) do
+    case get(conn, file_id) do
+      {:error, error} ->
+        Logger.error("unable to get file from ipfs (#{file_id}), error: #{error}")
+        :timer.sleep(35000)
+        get_retry(conn, file_id)
+
+      result ->
+        result
+    end
   end
 
   @doc """
